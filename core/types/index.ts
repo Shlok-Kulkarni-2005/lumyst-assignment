@@ -48,3 +48,26 @@ export interface CrossC1C2Relationship {
 	toC2: string;
 	label: string;
 }
+
+// Minimal shape for React Flow nodes used by custom components
+export interface ReactFlowNode {
+  id: string;
+  position: { x: number; y: number };
+  type?: string;
+  data: {
+    label: string;
+    type?: string;
+    syntaxType?: string;
+    filePath?: string;
+    isAbstract?: boolean;
+    isOverride?: boolean;
+    categoryData?: {
+      c1Category?: string;
+      c2Name?: string;
+      nodesInCategory?: number;
+      nodeCount?: number;
+      categoryDescription?: string;
+      description?: string;
+    };
+  };
+}

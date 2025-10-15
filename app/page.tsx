@@ -1,11 +1,12 @@
 "use client";
 
-import { addEdge, applyEdgeChanges, applyNodeChanges, ReactFlow } from "@xyflow/react";
+import { addEdge, applyEdgeChanges, applyNodeChanges, ReactFlow, Background, Controls, MiniMap } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
 import { useCallback, useState } from "react";
 import { convertDataToGraphNodesAndEdges } from "../core/data/data-converter";
 import { GraphFormatService } from "../core/graph-format.service";
 import { ReactFlowService } from "../core/react-flow.service";
+import { nodeTypes } from "../components/react-flow-nodes";
 
 const graphFormatService = new GraphFormatService();
 const reactFlowService = new ReactFlowService();
@@ -20,12 +21,13 @@ const {
 } = convertDataToGraphNodesAndEdges();
 
 const layoutedData = graphFormatService.layoutCategoriesWithNodes(
-	graphNodes,
-	graphEdges,
-	c1Output,
-	c2Subcategories,
-	c2Relationships,
-	crossC1C2Relationships
+    graphNodes,
+    graphEdges,
+    c1Output,
+    c2Subcategories,
+    c2Relationships,
+    crossC1C2Relationships,
+    { rankdir: 'TB', nodesep: 70, ranksep: 140 }
 );
 
 const { nodes: initialNodes, edges: initialEdges } = reactFlowService.convertDataToReactFlowDataTypes(
@@ -60,11 +62,15 @@ export default function App() {
 				onNodesChange={onNodesChange}
 				onEdgesChange={onEdgesChange}
 				onConnect={onConnect}
+				nodeTypes={nodeTypes as any}
 				fitView
 				minZoom={0.1}
 				maxZoom={2}
 				style={{ background: "white" }}
 			/>
+			<Controls />
+			<MiniMap zoomable pannable />
+			<Background gap={24} />
 		</div>
 	);
 }

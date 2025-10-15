@@ -12,8 +12,8 @@ export class ReactFlowService {
 			...graphNodes.map((node) => ({
 				id: node.id,
 				position: node.position || { x: 0, y: 0 },
-				data: { label: node.label },
-				type: 'default',
+				data: { label: node.label, type: 'file' },
+				type: 'graphNode',
 				style: {
 					background: '#dbeafe',
 					border: '2px solid #3b82f6',
@@ -25,8 +25,8 @@ export class ReactFlowService {
 			...c1Nodes.map((node) => ({
 				id: node.id,
 				position: node.position || { x: 0, y: 0 },
-				data: { label: node.label },
-				type: 'default',
+				data: { label: node.label, categoryData: { c1Category: node.c1Category, nodesInCategory: node.nodesInCategory } },
+				type: 'c1CategoryNode',
 				style: {
 					background: '#fef2f2',
 					border: '3px solid #dc2626',
@@ -39,8 +39,8 @@ export class ReactFlowService {
 			...c2Nodes.map((node) => ({
 				id: node.id,
 				position: node.position || { x: 0, y: 0 },
-				data: { label: node.label },
-				type: 'default',
+				data: { label: node.label, categoryData: { c2Name: node.c2Name, nodeCount: node.nodeCount } },
+				type: 'c2SubcategoryNode',
 				style: {
 					background: '#f0fdf4',
 					border: '2px solid #16a34a',
